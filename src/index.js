@@ -94,51 +94,81 @@ let greenNum = 18;
 let brownNum = 21;
 let blueNum = 12;
 
-window.addEventListener('click', () => {
-    
+let deckArray;
+ancientsContainer.addEventListener('click', () => {
+    deckArray = []
+    deckArray.push(cardsDataGreen);
+    deckArray.push(cardsDataBrown);
+    deckArray.push(cardsDataBlue);  
 
     for(let i = 0; i < ancients.length; i++) {
         if (ancients[i].classList.contains('active') && difficulty[2].classList.contains('active')) {
             
-            
+            let greenCards = +(stages[0].innerHTML) + +(stages[3].innerHTML) + +(stages[6].innerHTML)
+            let brownCards = +(stages[1].innerHTML) + +(stages[4].innerHTML) + +(stages[7].innerHTML)
+            let blueCards = +(stages[2].innerHTML) + +(stages[5].innerHTML) + +(stages[8].innerHTML)
 
-
-            let deckArray = [];
-
-            deckArray.push(cardsDataGreen);
-            deckArray.push(cardsDataBrown);
-            deckArray.push(cardsDataBlue);
-            deckArray.filter(() => {
-                let greenCards = ancientsData[i].firstStage.greenCards + ancientsData[i].secondStage.greenCards + ancientsData[i].thirdStage.greenCards
-                let brownCards = ancientsData[i].firstStage.brownCards + ancientsData[i].secondStage.brownCards + ancientsData[i].thirdStage.brownCards
-                let blueCards = ancientsData[i].firstStage.blueCards + ancientsData[i].secondStage.blueCards + ancientsData[i].thirdStage.blueCard
-
-                while(cardsDataGreen.length !== greenCards) {
-                    deckArray[0].splice(getRandomNum(greenNum), 1)
-                }
-                while(cardsDataBrown.length !== brownCards) {
-                    deckArray[1].splice(getRandomNum(brownNum), 1)
-                }
-                while(cardsDataBlue.length !== blueCards) {
-                    deckArray[2].splice(getRandomNum(blueNum), 1)
-                }
-            })
-
-            console.log(deckArray)
-/*
-           deck.addEventListener('click', () => {
-  
-                currentCard.style.backgroundImage = `url('${deckArray[0][0].cardFace}')`
-                deckArray[0].splice(0, 1)
-                console.log(deckArray)
-            })*/
-
-
+            while(deckArray[0].length > greenCards) {
+                deckArray[0].splice(getRandomNum(greenNum), 1) 
+            }
+            while(deckArray[1].length > brownCards) {
+                deckArray[1].splice(getRandomNum(brownNum), 1)
+            }
+            while(deckArray[2].length > blueCards) {
+                deckArray[2].splice(getRandomNum(blueNum), 1)
+            }
         }
+    } 
+    
+    console.log(deckArray)
+})    
+
+
+    
+
+
+
+
+
+deck.addEventListener('click', () => {
+    if (stages[0].innerHTML > 0) {
+        currentCard.style.backgroundImage = `url('${deckArray[0][0].cardFace}')`
+        deckArray[0].splice(0, 1)
+        stages[0].innerHTML = stages[0].innerHTML - 1;
+    } else if (stages[1].innerHTML > 0) {
+        currentCard.style.backgroundImage = `url('${deckArray[1][0].cardFace}')`
+        deckArray[1].splice(0, 1)
+        stages[1].innerHTML = stages[1].innerHTML - 1;
+    } else if (stages[2].innerHTML > 0) {
+        currentCard.style.backgroundImage = `url('${deckArray[2][0].cardFace}')`
+        deckArray[2].splice(0, 1)
+        stages[2].innerHTML = stages[2].innerHTML - 1;
+    } else if (stages[3].innerHTML > 0) {
+        currentCard.style.backgroundImage = `url('${deckArray[0][0].cardFace}')`
+        deckArray[0].splice(0, 1)
+        stages[3].innerHTML = stages[3].innerHTML - 1;
+    } else if (stages[4].innerHTML > 0) {
+        currentCard.style.backgroundImage = `url('${deckArray[1][0].cardFace}')`
+        deckArray[1].splice(0, 1)
+        stages[4].innerHTML = stages[4].innerHTML - 1;
+    } else if (stages[5].innerHTML > 0) {
+        currentCard.style.backgroundImage = `url('${deckArray[2][0].cardFace}')`
+        deckArray[2].splice(0, 1)
+        stages[5].innerHTML = stages[5].innerHTML - 1;
+    } else if (stages[6].innerHTML > 0) {
+        currentCard.style.backgroundImage = `url('${deckArray[0][0].cardFace}')`
+        deckArray[0].splice(0, 1)
+        stages[6].innerHTML = stages[6].innerHTML - 1;
+    } else if (stages[7].innerHTML > 0) {
+        currentCard.style.backgroundImage = `url('${deckArray[1][0].cardFace}')`
+        deckArray[1].splice(0, 1)
+        stages[7].innerHTML = stages[7].innerHTML - 1;
+    } else if (stages[8].innerHTML > 0) {
+        currentCard.style.backgroundImage = `url('${deckArray[2][0].cardFace}')`
+        deckArray[2].splice(0, 1)
+        stages[8].innerHTML = stages[8].innerHTML - 1;
     }
 })
-
-
 
 
 
