@@ -63,27 +63,6 @@ import cardsDataBrown from './data/mythicCards/brown/index.js'
 
 import './data/mythicCards/blue/index.js'
 import cardsDataBlue from './data/mythicCards/blue/index.js'
-/*
-let randomGreen;
-const getRandomGreen = () => {
-    let min = Math.ceil(1);
-    let max = Math.floor(18);
-    randomGreen = Math.floor(Math.random() * (max - min)) + min;
-}
-
-let randomBrown;
-const getRandomBrown = () => {
-    let min = Math.ceil(1);
-    let max = Math.floor(21);
-    randomBrown = Math.floor(Math.random() * (max - min)) + min;
-}
-
-let randomBlue;
-const getRandomBlue = () => {
-    let min = Math.ceil(1);
-    let max = Math.floor(12);
-    randomBlue = Math.floor(Math.random() * (max - min)) + min;
-}*/
 
 function getRandomNum(num) {
     let randomNum = Math.floor(Math.random() * num);
@@ -95,19 +74,19 @@ let brownNum = 21;
 let blueNum = 12;
 
 let deckArray;
-ancientsContainer.addEventListener('click', () => {
+
+
+function createDeck() {
     deckArray = []
     deckArray.push(cardsDataGreen);
     deckArray.push(cardsDataBrown);
     deckArray.push(cardsDataBlue);  
 
+    let greenCards = +(stages[0].innerHTML) + +(stages[3].innerHTML) + +(stages[6].innerHTML)
+    let brownCards = +(stages[1].innerHTML) + +(stages[4].innerHTML) + +(stages[7].innerHTML)
+    let blueCards = +(stages[2].innerHTML) + +(stages[5].innerHTML) + +(stages[8].innerHTML)
     for(let i = 0; i < ancients.length; i++) {
         if (ancients[i].classList.contains('active') && difficulty[2].classList.contains('active')) {
-            
-            let greenCards = +(stages[0].innerHTML) + +(stages[3].innerHTML) + +(stages[6].innerHTML)
-            let brownCards = +(stages[1].innerHTML) + +(stages[4].innerHTML) + +(stages[7].innerHTML)
-            let blueCards = +(stages[2].innerHTML) + +(stages[5].innerHTML) + +(stages[8].innerHTML)
-
             while(deckArray[0].length > greenCards) {
                 deckArray[0].splice(getRandomNum(greenNum), 1) 
             }
@@ -117,20 +96,44 @@ ancientsContainer.addEventListener('click', () => {
             while(deckArray[2].length > blueCards) {
                 deckArray[2].splice(getRandomNum(blueNum), 1)
             }
+        } else if (ancients[i].classList.contains('active') && difficulty[1].classList.contains('active')) {
+            let easyArray = [];
+            let easyArray1 = deckArray[0].filter((item) => {
+                return item.difficulty !== 'hard' 
+            });
+            let easyArray2 = deckArray[1].filter((item) => {
+                return item.difficulty !== 'hard' 
+            });
+            let easyArray3 = deckArray[2].filter((item) => {
+                return item.difficulty !== 'hard' 
+            });
+
+            easyArray.push(easyArray1, easyArray2, easyArray3);
+            
+            while(easyArray[0].length > greenCards) {
+                easyArray[0].splice(getRandomNum(greenNum), 1) 
+            }
+            while(easyArray[1].length > brownCards) {
+                easyArray[1].splice(getRandomNum(brownNum), 1)
+            }
+            while(easyArray[2].length > blueCards) {
+                easyArray[2].splice(getRandomNum(blueNum), 1)
+            }
+            
+            deckArray = easyArray;
+            
         }
+
     } 
-    
-    console.log(deckArray)
-})    
 
+}
 
-    
-
-
-
-
+ancientsContainer.addEventListener('click', createDeck);
+difficultyContainer.addEventListener('click', createDeck);
 
 deck.addEventListener('click', () => {
+    let deckLength = deckArray[0].length + deckArray[1].length + deckArray[2].length;
+    console.log(deckLength)
     if (stages[0].innerHTML > 0) {
         currentCard.style.backgroundImage = `url('${deckArray[0][0].cardFace}')`
         deckArray[0].splice(0, 1)
@@ -167,6 +170,8 @@ deck.addEventListener('click', () => {
         currentCard.style.backgroundImage = `url('${deckArray[2][0].cardFace}')`
         deckArray[2].splice(0, 1)
         stages[8].innerHTML = stages[8].innerHTML - 1;
+    } else if (deckLength === 0) {
+        deck.style.backgroundImage = 'none';
     }
 })
 
