@@ -1,6 +1,6 @@
 import "./styles/index.css"
+import _ from "lodash"
 import deckImage from "./assets/mythicCardBackground.png"
-
 import ancientsData from './data/ancients'
 
 const ancients = document.querySelectorAll('.ancient-card');
@@ -36,7 +36,6 @@ ancientsContainer.addEventListener('click', (e) => {
         }
     }
     createDeck();
-    //currentCard.style.backgroundImage = 'none';
 })
 
 const difficulty = document.querySelectorAll('.difficulty');
@@ -69,7 +68,6 @@ difficultyContainer.addEventListener('click', (e) => {
         }
     }
     createDeck();
-    //if(target.classList.contains('active')) currentCard.style.backgroundImage = 'none';
 })
 
 import './data/mythicCards/green/index.js'
@@ -93,6 +91,10 @@ let blueNum = 12;
 let deckArray;
 
 function createDeck() {
+    stageNumber[0].style.color = 'white';
+    stageNumber[1].style.color = 'white';
+    stageNumber[2].style.color = 'white';
+    deck.style.cursor = 'pointer';
     deckArray = []
     deckArray.push(cardsDataGreen);
     deckArray.push(cardsDataBrown);
@@ -126,8 +128,52 @@ function createDeck() {
                 easyArray[2].splice(getRandomNum(blueNum), 1)
             }
             
-            deckArray = easyArray;
+            easyArray[0] = _.shuffle(easyArray[0])
+            easyArray[1] = _.shuffle(easyArray[1])
+            easyArray[2] = _.shuffle(easyArray[2])
             
+            let stagedDeckArray = [[],[],[]]
+            for (let i = 0; i < stages[0].innerHTML; i++) {
+                let pop = easyArray[0].pop();
+                stagedDeckArray[0].push(pop)
+            }
+            for (let i = 0; i < stages[1].innerHTML; i++) {
+                let pop = easyArray[1].pop();
+                stagedDeckArray[0].push(pop)
+            }
+            for (let i = 0; i < stages[2].innerHTML; i++) {
+                let pop = easyArray[2].pop();
+                stagedDeckArray[0].push(pop)
+            }
+            for (let i = 0; i < stages[3].innerHTML; i++) {
+                let pop = easyArray[0].pop();
+                stagedDeckArray[1].push(pop)
+            }
+            for (let i = 0; i < stages[4].innerHTML; i++) {
+                let pop = easyArray[1].pop();
+                stagedDeckArray[1].push(pop)
+            }
+            for (let i = 0; i < stages[5].innerHTML; i++) {
+                let pop = easyArray[2].pop();
+                stagedDeckArray[1].push(pop)
+            }
+            for (let i = 0; i < stages[6].innerHTML; i++) {
+                let pop = easyArray[0].pop();
+                stagedDeckArray[2].push(pop)
+            }
+            for (let i = 0; i < stages[7].innerHTML; i++) {
+                let pop = easyArray[1].pop();
+                stagedDeckArray[2].push(pop)
+            }
+            for (let i = 0; i < stages[8].innerHTML; i++) {
+                let pop = easyArray[2].pop();
+                stagedDeckArray[2].push(pop)
+            }
+
+            stagedDeckArray[0] = _.shuffle(stagedDeckArray[0])
+            stagedDeckArray[1] = _.shuffle(stagedDeckArray[1])
+            stagedDeckArray[2] = _.shuffle(stagedDeckArray[2])
+            deckArray = stagedDeckArray;         
         } else if (ancients[i].classList.contains('active') && difficulty[0].classList.contains('active')) {
             let superEasyArray = [];
             let superEasyArray1 = deckArray[0].filter((item) => {
@@ -166,11 +212,67 @@ function createDeck() {
                 superEasyArray[2].push(normalBlueArray[getRandomNum(4)])
             }
             
-            deckArray = superEasyArray;
+            superEasyArray[0] = _.shuffle(superEasyArray[0])
+            superEasyArray[1] = _.shuffle(superEasyArray[1])
+            superEasyArray[2] = _.shuffle(superEasyArray[2])
+
+            let stagedDeckArray = [[],[],[]]
+            for (let i = 0; i < stages[0].innerHTML; i++) {
+                let pop = superEasyArray[0].pop();
+                stagedDeckArray[0].push(pop)
+            }
+            for (let i = 0; i < stages[1].innerHTML; i++) {
+                let pop = superEasyArray[1].pop();
+                stagedDeckArray[0].push(pop)
+            }
+            for (let i = 0; i < stages[2].innerHTML; i++) {
+                let pop = superEasyArray[2].pop();
+                stagedDeckArray[0].push(pop)
+            }
+            for (let i = 0; i < stages[3].innerHTML; i++) {
+                let pop = superEasyArray[0].pop();
+                stagedDeckArray[1].push(pop)
+            }
+            for (let i = 0; i < stages[4].innerHTML; i++) {
+                let pop = superEasyArray[1].pop();
+                stagedDeckArray[1].push(pop)
+            }
+            for (let i = 0; i < stages[5].innerHTML; i++) {
+                let pop = superEasyArray[2].pop();
+                stagedDeckArray[1].push(pop)
+            }
+            for (let i = 0; i < stages[6].innerHTML; i++) {
+                let pop = superEasyArray[0].pop();
+                stagedDeckArray[2].push(pop)
+            }
+            for (let i = 0; i < stages[7].innerHTML; i++) {
+                let pop = superEasyArray[1].pop();
+                stagedDeckArray[2].push(pop)
+            }
+            for (let i = 0; i < stages[8].innerHTML; i++) {
+                let pop = superEasyArray[2].pop();
+                stagedDeckArray[2].push(pop)
+            }
+
+            stagedDeckArray[0] = _.shuffle(stagedDeckArray[0])
+            stagedDeckArray[1] = _.shuffle(stagedDeckArray[1])
+            stagedDeckArray[2] = _.shuffle(stagedDeckArray[2])
+            deckArray = stagedDeckArray;
         } else if (ancients[i].classList.contains('active') && difficulty[2].classList.contains('active')) {
             let averageArray = [];
-            averageArray = deckArray;
+            let averageArray1 = deckArray[0].filter((item) => {
+                return item
+            });
+            let averageArray2 = deckArray[1].filter((item) => {
+                return item
+            });
+            let averageArray3 = deckArray[2].filter((item) => {
+                return item
+            });
 
+            averageArray.push(averageArray1, averageArray2, averageArray3);
+            
+            
             while(averageArray[0].length > greenCards) {
                 averageArray[0].splice(getRandomNum(greenNum), 1) 
             }
@@ -180,7 +282,53 @@ function createDeck() {
             while(averageArray[2].length > blueCards) {
                 averageArray[2].splice(getRandomNum(blueNum), 1)
             }
-            deckArray = averageArray;
+            
+            averageArray[0] = _.shuffle(averageArray[0])
+            averageArray[1] = _.shuffle(averageArray[1])
+            averageArray[2] = _.shuffle(averageArray[2])
+
+            let stagedDeckArray = [[],[],[]]
+            for (let i = 0; i < stages[0].innerHTML; i++) {
+                let pop = averageArray[0].pop();
+                stagedDeckArray[0].push(pop)
+            }
+            for (let i = 0; i < stages[1].innerHTML; i++) {
+                let pop = averageArray[1].pop();
+                stagedDeckArray[0].push(pop)
+            }
+            for (let i = 0; i < stages[2].innerHTML; i++) {
+                let pop = averageArray[2].pop();
+                stagedDeckArray[0].push(pop)
+            }
+            for (let i = 0; i < stages[3].innerHTML; i++) {
+                let pop = averageArray[0].pop();
+                stagedDeckArray[1].push(pop)
+            }
+            for (let i = 0; i < stages[4].innerHTML; i++) {
+                let pop = averageArray[1].pop();
+                stagedDeckArray[1].push(pop)
+            }
+            for (let i = 0; i < stages[5].innerHTML; i++) {
+                let pop = averageArray[2].pop();
+                stagedDeckArray[1].push(pop)
+            }
+            for (let i = 0; i < stages[6].innerHTML; i++) {
+                let pop = averageArray[0].pop();
+                stagedDeckArray[2].push(pop)
+            }
+            for (let i = 0; i < stages[7].innerHTML; i++) {
+                let pop = averageArray[1].pop();
+                stagedDeckArray[2].push(pop)
+            }
+            for (let i = 0; i < stages[8].innerHTML; i++) {
+                let pop = averageArray[2].pop();
+                stagedDeckArray[2].push(pop)
+            }
+
+            stagedDeckArray[0] = _.shuffle(stagedDeckArray[0])
+            stagedDeckArray[1] = _.shuffle(stagedDeckArray[1])
+            stagedDeckArray[2] = _.shuffle(stagedDeckArray[2])
+            deckArray = stagedDeckArray;
         } else if (ancients[i].classList.contains('active') && difficulty[3].classList.contains('active')) {
             let hardArray = [];
             let hardArray1 = deckArray[0].filter((item) => {
@@ -205,7 +353,52 @@ function createDeck() {
                 hardArray[2].splice(getRandomNum(blueNum), 1)
             }
             
-            deckArray = hardArray;
+            hardArray[0] = _.shuffle(hardArray[0])
+            hardArray[1] = _.shuffle(hardArray[1])
+            hardArray[2] = _.shuffle(hardArray[2])
+
+            let stagedDeckArray = [[],[],[]]
+            for (let i = 0; i < stages[0].innerHTML; i++) {
+                let pop = hardArray[0].pop();
+                stagedDeckArray[0].push(pop)
+            }
+            for (let i = 0; i < stages[1].innerHTML; i++) {
+                let pop = hardArray[1].pop();
+                stagedDeckArray[0].push(pop)
+            }
+            for (let i = 0; i < stages[2].innerHTML; i++) {
+                let pop = hardArray[2].pop();
+                stagedDeckArray[0].push(pop)
+            }
+            for (let i = 0; i < stages[3].innerHTML; i++) {
+                let pop = hardArray[0].pop();
+                stagedDeckArray[1].push(pop)
+            }
+            for (let i = 0; i < stages[4].innerHTML; i++) {
+                let pop = hardArray[1].pop();
+                stagedDeckArray[1].push(pop)
+            }
+            for (let i = 0; i < stages[5].innerHTML; i++) {
+                let pop = hardArray[2].pop();
+                stagedDeckArray[1].push(pop)
+            }
+            for (let i = 0; i < stages[6].innerHTML; i++) {
+                let pop = hardArray[0].pop();
+                stagedDeckArray[2].push(pop)
+            }
+            for (let i = 0; i < stages[7].innerHTML; i++) {
+                let pop = hardArray[1].pop();
+                stagedDeckArray[2].push(pop)
+            }
+            for (let i = 0; i < stages[8].innerHTML; i++) {
+                let pop = hardArray[2].pop();
+                stagedDeckArray[2].push(pop)
+            }
+
+            stagedDeckArray[0] = _.shuffle(stagedDeckArray[0])
+            stagedDeckArray[1] = _.shuffle(stagedDeckArray[1])
+            stagedDeckArray[2] = _.shuffle(stagedDeckArray[2])
+            deckArray = stagedDeckArray;
         } else if (ancients[i].classList.contains('active') && difficulty[4].classList.contains('active')) {
             let superHardArray = [];
             let superHardArray1 = deckArray[0].filter((item) => {
@@ -244,55 +437,83 @@ function createDeck() {
                 superHardArray[2].push(normalBlueArray[getRandomNum(4)])
             }
             
-            deckArray = superHardArray;
+            superHardArray[0] = _.shuffle(superHardArray[0])
+            superHardArray[1] = _.shuffle(superHardArray[1])
+            superHardArray[2] = _.shuffle(superHardArray[2])
+            
+            let stagedDeckArray = [[],[],[]]
+            for (let i = 0; i < stages[0].innerHTML; i++) {
+                let pop = superHardArray[0].pop();
+                stagedDeckArray[0].push(pop)
+            }
+            for (let i = 0; i < stages[1].innerHTML; i++) {
+                let pop = superHardArray[1].pop();
+                stagedDeckArray[0].push(pop)
+            }
+            for (let i = 0; i < stages[2].innerHTML; i++) {
+                let pop = superHardArray[2].pop();
+                stagedDeckArray[0].push(pop)
+            }
+            for (let i = 0; i < stages[3].innerHTML; i++) {
+                let pop = superHardArray[0].pop();
+                stagedDeckArray[1].push(pop)
+            }
+            for (let i = 0; i < stages[4].innerHTML; i++) {
+                let pop = superHardArray[1].pop();
+                stagedDeckArray[1].push(pop)
+            }
+            for (let i = 0; i < stages[5].innerHTML; i++) {
+                let pop = superHardArray[2].pop();
+                stagedDeckArray[1].push(pop)
+            }
+            for (let i = 0; i < stages[6].innerHTML; i++) {
+                let pop = superHardArray[0].pop();
+                stagedDeckArray[2].push(pop)
+            }
+            for (let i = 0; i < stages[7].innerHTML; i++) {
+                let pop = superHardArray[1].pop();
+                stagedDeckArray[2].push(pop)
+            }
+            for (let i = 0; i < stages[8].innerHTML; i++) {
+                let pop = superHardArray[2].pop();
+                stagedDeckArray[2].push(pop)
+            }
+
+            stagedDeckArray[0] = _.shuffle(stagedDeckArray[0])
+            stagedDeckArray[1] = _.shuffle(stagedDeckArray[1])
+            stagedDeckArray[2] = _.shuffle(stagedDeckArray[2])
+            deckArray = stagedDeckArray;
         }
     }
 }
 
+const stageNumber = document.querySelectorAll('.stage-number');
+
 deck.addEventListener('click', () => {
-    let deckLength = deckArray[0].length + deckArray[1].length + deckArray[2].length;
-    console.log(deckLength)
-    if (stages[0].innerHTML > 0) {
-        currentCard.style.backgroundImage = `url('${deckArray[0][0].cardFace}')`
-        deckArray[0].splice(0, 1)
-        stages[0].innerHTML = stages[0].innerHTML - 1;
-    } else if (stages[1].innerHTML > 0) {
-        currentCard.style.backgroundImage = `url('${deckArray[1][0].cardFace}')`
-        deckArray[1].splice(0, 1)
-        stages[1].innerHTML = stages[1].innerHTML - 1;
-    } else if (stages[2].innerHTML > 0) {
-        currentCard.style.backgroundImage = `url('${deckArray[2][0].cardFace}')`
-        deckArray[2].splice(0, 1)
-        stages[2].innerHTML = stages[2].innerHTML - 1;
-    } else if (stages[3].innerHTML > 0) {
-        currentCard.style.backgroundImage = `url('${deckArray[0][0].cardFace}')`
-        deckArray[0].splice(0, 1)
-        stages[3].innerHTML = stages[3].innerHTML - 1;
-    } else if (stages[4].innerHTML > 0) {
-        currentCard.style.backgroundImage = `url('${deckArray[1][0].cardFace}')`
-        deckArray[1].splice(0, 1)
-        stages[4].innerHTML = stages[4].innerHTML - 1;
-    } else if (stages[5].innerHTML > 0) {
-        currentCard.style.backgroundImage = `url('${deckArray[2][0].cardFace}')`
-        deckArray[2].splice(0, 1)
-        stages[5].innerHTML = stages[5].innerHTML - 1;
-    } else if (stages[6].innerHTML > 0) {
-        currentCard.style.backgroundImage = `url('${deckArray[0][0].cardFace}')`
-        deckArray[0].splice(0, 1)
-        stages[6].innerHTML = stages[6].innerHTML - 1;
-    } else if (stages[7].innerHTML > 0) {
-        currentCard.style.backgroundImage = `url('${deckArray[1][0].cardFace}')`
-        deckArray[1].splice(0, 1)
-        stages[7].innerHTML = stages[7].innerHTML - 1;
-    } else if (stages[8].innerHTML > 0) {
-        currentCard.style.backgroundImage = `url('${deckArray[2][0].cardFace}')`
-        deckArray[2].splice(0, 1)
-        stages[8].innerHTML = stages[8].innerHTML - 1;
-    } else if (deckLength === 0) {
+    if (deckArray[0].length > 0) {
+        let pop = deckArray[0].pop()
+        currentCard.style.backgroundImage = `url('${pop.cardFace}')`
+        if(pop.color === 'green') stages[0].innerHTML = stages[0].innerHTML - 1;
+        if(pop.color === 'brown') stages[1].innerHTML = stages[1].innerHTML - 1;
+        if(pop.color === 'blue') stages[2].innerHTML = stages[2].innerHTML - 1;
+    } else if (deckArray[1].length > 0) {
+        let pop = deckArray[1].pop()
+        currentCard.style.backgroundImage = `url('${pop.cardFace}')`
+        if(pop.color === 'green') stages[3].innerHTML = stages[3].innerHTML - 1;
+        if(pop.color === 'brown') stages[4].innerHTML = stages[4].innerHTML - 1;
+        if(pop.color === 'blue') stages[5].innerHTML = stages[5].innerHTML - 1;
+    } else if (deckArray[2].length > 0) {
+        let pop = deckArray[2].pop()
+        currentCard.style.backgroundImage = `url('${pop.cardFace}')`
+        if(pop.color === 'green') stages[6].innerHTML = stages[6].innerHTML - 1;
+        if(pop.color === 'brown') stages[7].innerHTML = stages[7].innerHTML - 1;
+        if(pop.color === 'blue') stages[8].innerHTML = stages[8].innerHTML - 1;
+    } 
+    if (deckArray[0].length === 0) stageNumber[0].style.color = '#2fac68';
+    if (deckArray[1].length === 0) stageNumber[1].style.color = '#2fac68';
+    if (deckArray[2].length === 0) {
+        stageNumber[2].style.color = '#2fac68';
         deck.style.backgroundImage = 'none';
-        //currentCard.style.backgroundImage = 'none';
+        deck.style.cursor = 'initial';
     }
 })
-
-
-
