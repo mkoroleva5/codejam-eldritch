@@ -203,13 +203,19 @@ function createDeck() {
             let normalBlueArray = cardsDataBlue.filter((item) => {return item.difficulty == 'normal'});
 
             while(superEasyArray[0].length < greenCards) {
-                superEasyArray[0].push(normalGreenArray[getRandomNum(8)])
+                normalGreenArray = _.shuffle(normalGreenArray);
+                let pop = normalGreenArray.pop();
+                superEasyArray[0].push(pop);
             }
             while(superEasyArray[1].length < brownCards) {
-                superEasyArray[1].push(normalBrownArray[getRandomNum(11)])
+                normalBrownArray = _.shuffle(normalBrownArray);
+                let pop = normalBrownArray.pop();
+                superEasyArray[1].push(pop);
             }
             while(superEasyArray[2].length < blueCards) {
-                superEasyArray[2].push(normalBlueArray[getRandomNum(4)])
+                normalBlueArray = _.shuffle(normalBlueArray);
+                let pop = normalBlueArray.pop();
+                superEasyArray[2].push(pop);
             }
             
             superEasyArray[0] = _.shuffle(superEasyArray[0])
@@ -428,13 +434,19 @@ function createDeck() {
             let normalBlueArray = cardsDataBlue.filter((item) => {return item.difficulty == 'normal'});
 
             while(superHardArray[0].length < greenCards) {
-                superHardArray[0].push(normalGreenArray[getRandomNum(8)])
+                normalGreenArray = _.shuffle(normalGreenArray);
+                let pop = normalGreenArray.pop();
+                superHardArray[0].push(pop);
             }
             while(superHardArray[1].length < brownCards) {
-                superHardArray[1].push(normalBrownArray[getRandomNum(11)])
+                normalBrownArray = _.shuffle(normalBrownArray);
+                let pop = normalBrownArray.pop();
+                superHardArray[1].push(pop);
             }
             while(superHardArray[2].length < blueCards) {
-                superHardArray[2].push(normalBlueArray[getRandomNum(4)])
+                normalBlueArray = _.shuffle(normalBlueArray);
+                let pop = normalBlueArray.pop();
+                superHardArray[2].push(pop);
             }
             
             superHardArray[0] = _.shuffle(superHardArray[0])

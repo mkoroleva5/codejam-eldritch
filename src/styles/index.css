@@ -43,7 +43,7 @@ body {
   background-image: url('../assets/wallpaper.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 50%;
+  background-position: 70%;
 }
 
 .wrapper {
@@ -51,21 +51,23 @@ body {
 }
 
 .ancients-container {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   position: absolute;
   top: 0;
   left: 0;
-  width: 75%;
-  height: 35%;
+  width: 100%;
+  max-width: 60%;
+  max-height: 35%;
   margin: 30px;
-  gap: 10px;
+  grid-gap: 10px;
 
 }
 
 .ancient-card {
-  width: 200px;
-  height: 259px;
+  width: 100%;
+  height: 0px;
+  padding-bottom: 129%;
   background-size: contain;
   background-repeat: no-repeat;
   border-radius: 16px;
@@ -75,18 +77,30 @@ body {
 
 .ancient-card:nth-of-type(1) {
   background-image: url(../assets/Ancients/Azathoth.png);
+  background-size: 100%;
+  background-position: 50%;
+  background-size: cover;
 }
 
 .ancient-card:nth-of-type(2) {
   background-image: url(../assets/Ancients/Cthulthu.png);
+  background-size: 100%;
+  background-position: 50%;
+  background-size: cover;
 }
 
 .ancient-card:nth-of-type(3) {
   background-image: url(../assets/Ancients/IogSothoth.png);
+  background-size: 100%;
+  background-position: 50%;
+  background-size: cover;
 }
 
 .ancient-card:nth-of-type(4) {
   background-image: url(../assets/Ancients/ShubNiggurath.png);
+  background-size: 100%;
+  background-position: 50%;
+  background-size: cover;
 }
 
 .ancient-card:hover {
@@ -97,7 +111,6 @@ body {
 .ancient-card:active {
   transform: scale(1);
 }
-
 
 .difficulty-container {
   display: flex;
@@ -149,17 +162,14 @@ body {
   flex-direction: column;
   width: 35%;
   height: 50%;
-  margin: 30px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  margin: 20px;
+  margin-right: 80px;
 }
 
 .stage-container {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 90%;
 }
 
 .stage-number {
@@ -205,13 +215,29 @@ body {
   background-color: rgb(78, 103, 138);
 }
 
+.deck-container {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  width: 70%;
+  max-height: 35%;
+  margin: 30px;
+  gap: 30px;
+}
+
+.deck-wrapper {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+  height: 100%;
+}
+
 .deck {
+  display: flex;
   width: 206px;
   height: 300px;
-  position: absolute;
-  bottom: 5%;
-  left: 35%;
-  margin: 30px;
   background-repeat: no-repeat;
   background-size: contain;
   border-radius: 16px;
@@ -220,6 +246,9 @@ body {
 
 .deck-active {
   background-image: url('../assets/mythicCardBackground.png');
+  background-size: 100%;
+  background-position: 50%;
+  background-size: cover;
 }
 
 .deck:hover {
@@ -232,13 +261,86 @@ body {
 }
 
 .current-card {
+  display: flex;
   width: 206px;
   height: 300px;
-  position: absolute;
-  bottom: 5%;
-  left: 55%;
-  margin: 30px;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100%;
+  background-position: 50%;
+  background-size: cover;
   border-radius: 16px;
+}
+
+@media (max-width: 1064px) {
+  .deck,
+  .current-card {
+    width: 165px;
+    height: 240px;
+  }
+}
+
+@media (max-width: 700px) {
+  .ancients-container {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    max-width: 40%;
+    margin: 0;
+    top: 20px;
+    left: 20px;
+  }
+
+  .deck-container {
+    max-height: 50%;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .counter {
+    width: 100%;
+    align-items: flex-end;
+    padding-right: 20px;
+  }
+
+  .deck-wrapper {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .difficulty-container {
+    right: 40px;
+    height: 25%;
+  }
+
+  .deck-container {
+    max-height: 60%;
+  }
+}
+
+@media (max-width: 430px) {
+  .ancients-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 24%;
+  }
+
+  .stage-number {
+    margin-right: 5px;
+  }
+
+  .stages {
+    gap: 5px;
+  }
+
+  .deck-wrapper {
+    gap: 10px;
+  }
+  
+  .deck-container {
+    margin: 0;
+  }
+
+  .counter {
+    margin-right: 0;
+  }
 }
